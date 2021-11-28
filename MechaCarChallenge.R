@@ -24,10 +24,16 @@ lot_summary <- susp_data %>% group_by(Manufacturing_Lot) %>% summarize(Mean_PSI 
 # and each lot individually are statistically different from the population mean of 
 # 1,500 pounds per square inch.
 
-# Run a t.test on all population
-#t.test(log10(susp_data$PSI),mu=mean(log10(population_table$Miles_Driven))) #compare sample versus population means
-t.test(susp_data$PSI, mu=1500) #compare sample versus population means
+# Run a t.test for the data across all Lots
+t.test(log10(susp_data$PSI), mu=log10(1500)) #compare sample versus population mean of 1500
 
 # Then use subset() to subset for each Manufacturing_Lot (there are 3 lots)
-suspension_data <- read.csv("Suspension_Coil.csv",stringsAsFactors = F, check.names = F)
+t.test(subset(log10(susp_data$PSI), susp_data$Manufacturing_Lot== 'Lot1'), mu=log10(1500))
+
+t.test(subset(log10(susp_data$PSI), susp_data$Manufacturing_Lot== 'Lot2'), mu=log10(1500))
+
+t.test(subset(log10(susp_data$PSI), susp_data$Manufacturing_Lot== 'Lot3'), mu=log10(1500))
+
+
+
 
